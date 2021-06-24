@@ -62,7 +62,7 @@ start
 ### _Ayudaron a levantar el proyecto desde sus inicios_
 
 - **Julian David Gonzalez** - *Trabajo en Front-End y Back-End* [julian98O9](https://github.com/julian9809)
-- **David Santiago Garces** - *Trabajo en Front-End y Back-End* *Diseño de Logotipo* - [SantiYami](https://github.com/SantiYami)
+- **David Santiago Garces** - *Trabajo en Front-End y Back-End* [SantiYami](https://github.com/SantiYami)
 - **Jhon Eddi Malagon** - *Trabajo en Front-End y Back-End* [JhonEddi](https://github.com/JhonEddi)
 
 También puedes mirar la lista de todos los [contribuyentes](https://github.com/SantiYami/BrowserElectron/contributors) quíenes han participado en este proyecto.
