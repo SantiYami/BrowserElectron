@@ -1,0 +1,31 @@
+{
+    "name": "evalua-browser",
+    "version": "1.0.0",
+    "description": "Navegador bien perron evalua",
+    "main": "main.js",
+    "scripts": {
+        "start": "electron .",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/EvaluaSAS/browser.git"
+    },
+    "keywords": [
+        "Browser",
+        "Evalua",
+        "Perron"
+    ],
+    "author": "Evalua S.A.S.",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/EvaluaSAS/browser/issues"
+    },
+    "homepage": "https://github.com/EvaluaSAS/browser#readme",
+    "devDependencies": {
+        "electron": "^13.1.4"
+    },
+    "dependencies": {
+        "tailwindcss": "^2.2.4"
+    }
+}
