@@ -47,7 +47,7 @@ npx tailwindcss build src/css/stylesTail.css -o src/styles/tailwind.css
 _Use el comando `start` que permitira abrir el navegador en modo de desarrollo_
 
 ```shell
-start
+npm start
 ```
 
 ## Construido con 🛠️
