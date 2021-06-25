@@ -1,13 +1,11 @@
 const { ipcRenderer } = require('electron');
 const maxResBtn = document.getElementById('maxResBtn');
 const maxResIco = document.getElementById('maxResIco');
-const mySideBar = document.getElementById('mySideBar');
-const ipc = ipcRenderer;
-var isLeftMenuActive = true;
+const ipcR = ipcRenderer;
 
 //MINIMIZE APP
 minimizeBtn.addEventListener('click', () => {
-    ipc.send('minimizeApp');
+    ipcR.send('minimizeApp');
 });
 
 //MAXIMIZE RESTORE APP
@@ -24,28 +22,22 @@ function changeMaxResBtn(isMaximizedApp) {
 }
 
 maxResBtn.addEventListener('click', () => {
-    ipc.send('maximizeRestoreApp');
+    ipcR.send('maximizeRestoreApp');
 });
 
-ipc.on('isMaximized', () => {
+ipcR.on('isMaximized', () => {
     changeMaxResBtn(true);
 });
-ipc.on('isRestored', () => {
+ipcR.on('isRestored', () => {
     changeMaxResBtn(false);
 });
 
 //CLOSE APP
 closeBtn.addEventListener('click', () => {
-    ipc.send('closeApp');
+    ipcR.send('closeApp');
 });
 
 //TOGGLE MENU
 showHideMenu.addEventListener('click', () => {
-    if (isLeftMenuActive) {
-        mySideBar.style.width = '0px';
-        isLeftMenuActive = false;
-    } else {
-        mySideBar.style.width = '21rem';
-        isLeftMenuActive = true;
-    }
+    ipcR.send('mySideBar');
 });

@@ -3,6 +3,7 @@
 // Modules to control application life and create native browser window
 const {
     app,
+    BrowserView,
     BrowserWindow,
     ipcMain
 } = require('electron');
@@ -25,10 +26,19 @@ function createWindow() {
             preload: path.join(__dirname, 'preload.js')
         }
     });
-
     // and load the index.html of the app.
     mainWindow.loadFile('src/index.html');
     mainWindow.setBackgroundColor('#343B48');
+    app.whenReady().then(() => {
+        createContent(mainWindow);
+        app.on('activate', function() {
+            // On macOS it's common to re-create a window in the app when the
+            // dock icon is clicked and there are no other windows open.
+            if (BrowserView.getAllWindows().length === 0) {
+                createContent(mainWindow);
+            }
+        });
+    });
     // Open the DevTools.
     //mainWindow.webContents.openDevTools();
 
@@ -40,7 +50,6 @@ function createWindow() {
 
     //MAXIMAZE RESTORE APP
     ipc.on('maximizeRestoreApp', () => {
-
         if (mainWindow.isMaximized()) {
             console.log('Click Restore');
             mainWindow.restore();
@@ -65,6 +74,38 @@ function createWindow() {
         console.log('Click closeBtn');
         mainWindow.close();
     });
+}
+
+// Ventana de contenido
+function createContent(mainWindow) {
+    const contentWindow = new BrowserView({
+        webPreferences: {
+            nodeIntegration: true,
+            contextIsolation: false,
+            devTools: true
+        }
+    });
+    mainWindow.setBrowserView(contentWindow);
+    contentWindow.setBounds({
+        x: 0,
+        y: 41,
+        width: 1200,
+        height: 640
+    });
+    contentWindow.setAutoResize({
+        width: true,
+        height: true,
+    });
+    //contentWindow.webContents.loadFile('src/browser.html');
+    contentWindow.webContents.loadURL('https://evalua.com.co/prest_unisanitas/evaluasa.eweb.Entrada');
+    //contentWindow.webContents.openDevTools();
+
+    //TOGGLE MENU
+    ipc.on('mySideBar', () => {
+        console.log('Click SideBar');
+        contentWindow.webContents.send('clickSideBar');
+    });
+
 }
 
 // This method will be called when Electron has finished

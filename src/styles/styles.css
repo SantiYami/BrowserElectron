@@ -25,12 +25,11 @@ body {
     box-sizing: border-box;
 }
 
-.mainApp>.topBar {
+.topBar {
     display: flex;
     flex-direction: row;
     width: 100%;
-    height: 3rem;
-    border-bottom: 3px solid #343B48;
+    height: 40px;
     background-color: #1B1D23;
     -webkit-user-select: none;
     user-select: none;
@@ -40,21 +39,15 @@ body {
     display: flex;
     flex-direction: row;
     align-items: center;
-}
-
-.topBar>.titleBar {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
     width: 100%;
+    height: 40px;
 }
 
 .titleBar>.toggleButton {
-    width: 3.3rem;
-    height: 3rem;
+    width: 40px;
+    height: 40px;
     border: none;
     outline: none;
-    color: #FFFFFF;
     background-color: transparent;
     background-repeat: no-repeat;
     background-position: center;
@@ -70,29 +63,45 @@ body {
     background-color: #4F9FEE;
 }
 
-.titleBar>img {
-    margin-left: 0.8rem;
-}
-
 .titleBar>.title {
+    font-size: 1.2rem;
     margin-left: 0.8rem;
     width: 100%;
     line-height: 2.5rem;
-    margin-top: 0.3rem;
-    padding-bottom: 0.3rem;
     -webkit-app-region: drag;
+}
+
+.titleBar>.topBtn {
+    width: 30px;
+    height: 29px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 100%;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.titleBar>.topBtn:hover {
+    background-color: #343B48;
+}
+
+.titleBar>.topBtn:active {
+    background-color: #4F9FEE;
 }
 
 .topBar>.titleBarBtns {
     display: flex;
     flex-direction: row;
     width: 9rem;
-    height: 3rem;
+    height: 40px;
 }
 
 .titleBarBtns>.topBtn {
-    width: 3rem;
-    height: 3rem;
+    width: 40px;
+    height: 40px;
     border: none;
     outline: none;
     background-color: transparent;
@@ -103,23 +112,11 @@ body {
 }
 
 .titleBarBtns>.topBtn:hover {
-    background-color: #272C36;
+    background-color: #343B48;
 }
 
 .titleBarBtns>.topBtn:active {
     background-color: #4F9FEE;
-}
-
-.titleBarBtns>.minimizeBtn {
-    color: #FFFFFF;
-}
-
-.titleBarBtns>.maxResBtn {
-    color: #FFFFFF;
-}
-
-.titleBarBtns>.closeBtn {
-    color: #FFFFFF;
 }
 
 .titleBarBtns>.closeBtn:hover {
@@ -143,7 +140,20 @@ body {
 .contentArea>.contentPages {
     width: 100%;
     height: 100%;
+    align-content: flex-start;
     -webkit-box-align: center;
     -webkit-box-pack: center;
     display: -webkit-box;
+}
+
+.color-primary-universidad-bg {
+    background-color: #FF6719;
+}
+
+.color-secondary-universidad-bg:hover {
+    background-color: #FFFFFF;
+}
+
+.color-primary-universidad {
+    color: #FFFFFF;
 }
