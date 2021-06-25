@@ -74,6 +74,7 @@ function createWindow() {
         console.log('Click closeBtn');
         mainWindow.close();
     });
+
 }
 
 // Ventana de contenido
@@ -106,6 +107,29 @@ function createContent(mainWindow) {
         contentWindow.webContents.send('clickSideBar');
     });
 
+    //HOME
+    ipc.on('home', () => {
+        console.log('Click homeBtn');
+        contentWindow.webContents.send('isHome');
+    });
+
+    //BACK
+    ipc.on('back', () => {
+        console.log('Click BackBtn');
+        contentWindow.webContents.send('isBack');
+    })
+
+    //FORWARD
+    ipc.on('forward', () => {
+        console.log('Click ForwardBtn');
+        contentWindow.webContents.send('isForward');
+    })
+
+    //RELOAD
+    ipc.on('reload', () => {
+        console.log('Click ReloadBtn');
+        contentWindow.webContents.send('isReload');
+    })
 }
 
 // This method will be called when Electron has finished

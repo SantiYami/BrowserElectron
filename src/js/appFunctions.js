@@ -41,3 +41,23 @@ closeBtn.addEventListener('click', () => {
 showHideMenu.addEventListener('click', () => {
     ipcR.send('mySideBar');
 });
+
+//HOME
+homeBtn.addEventListener('click', () => {
+    ipcR.send('home');
+})
+
+//BACK
+backBtn.addEventListener('click', () => {
+    ipcR.send('back');
+})
+
+//FORWARD
+forwardBtn.addEventListener('click', () => {
+    ipcR.send('forward');
+})
+
+//RELOAD
+reloadBtn.addEventListener('click', () => {
+    ipcR.send('reload');
+})
