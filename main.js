@@ -98,7 +98,7 @@ function createContent(mainWindow) {
         height: true,
     });
     //contentWindow.webContents.loadFile('src/browser.html');
-    contentWindow.webContents.loadURL('https://evalua.com.co/prest_unisanitas/evaluasa.eweb.Entrada');
+    contentWindow.webContents.loadURL('https://youtube.com');
     //contentWindow.webContents.openDevTools();
 
     //TOGGLE MENU
@@ -111,24 +111,28 @@ function createContent(mainWindow) {
     ipc.on('home', () => {
         console.log('Click homeBtn');
         contentWindow.webContents.send('isHome');
+        contentWindow.webContents.loadURL('https://google.com');
     });
 
     //BACK
     ipc.on('back', () => {
         console.log('Click BackBtn');
         contentWindow.webContents.send('isBack');
+        contentWindow.webContents.goBack();
     })
 
     //FORWARD
     ipc.on('forward', () => {
         console.log('Click ForwardBtn');
         contentWindow.webContents.send('isForward');
+        contentWindow.webContents.goForward();
     })
 
     //RELOAD
     ipc.on('reload', () => {
         console.log('Click ReloadBtn');
         contentWindow.webContents.send('isReload');
+        contentWindow.webContents.reload();
     })
 }
 
