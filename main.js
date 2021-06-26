@@ -13,17 +13,17 @@ const ipc = ipcMain;
 function createWindow() {
     // Create the browser window.
     const mainWindow = new BrowserWindow({
+        show: false,
         width: 1200,
         height: 680,
         minWidth: 940,
         minHeight: 560,
         frame: false,
-        //fullscreen: true,
         webPreferences: {
             nodeIntegration: true,
+            //preload: path.join(app.getAppPath(), 'src/js/appFunctions.js'),
             contextIsolation: false,
-            devTools: true,
-            preload: path.join(__dirname, 'preload.js')
+            devTools: false,
         }
     });
     // and load the index.html of the app.
@@ -39,6 +39,12 @@ function createWindow() {
             }
         });
     });
+
+    //Muestra la ventana una vez ya a sido creada
+    mainWindow.once('ready-to-show', () => {
+        mainWindow.show();
+    });
+
     // Open the DevTools.
     //mainWindow.webContents.openDevTools();
 
@@ -81,25 +87,31 @@ function createWindow() {
 function createContent(mainWindow) {
     const contentWindow = new BrowserView({
         webPreferences: {
-            nodeIntegration: true,
+            //preload: path.join(__dirname, 'src/js/appFunctions.js'),
+            //nodeIntegration: true, // PELIGROSO DE USAR, BLOQUEA HASTA JQUERY
             contextIsolation: false,
             devTools: true
         }
     });
+
     mainWindow.setBrowserView(contentWindow);
     contentWindow.setBounds({
-        x: 0,
+        x: 1,
         y: 41,
-        width: 1200,
-        height: 640
+        width: 1198,
+        height: 638
     });
+
     contentWindow.setAutoResize({
         width: true,
         height: true,
     });
-    //contentWindow.webContents.loadFile('src/browser.html');
-    contentWindow.webContents.loadURL('https://youtube.com');
-    //contentWindow.webContents.openDevTools();
+
+    mainWindow.setFullScreen(true);
+
+    contentWindow.webContents.loadFile('src/browser.html');
+    //contentWindow.webContents.loadURL('https://youtube.com');
+    contentWindow.webContents.openDevTools();
 
     //TOGGLE MENU
     ipc.on('mySideBar', () => {
@@ -110,30 +122,42 @@ function createContent(mainWindow) {
     //HOME
     ipc.on('home', () => {
         console.log('Click homeBtn');
-        contentWindow.webContents.send('isHome');
+        mainWindow.send('home');
         contentWindow.webContents.loadURL('https://google.com');
     });
 
     //BACK
     ipc.on('back', () => {
         console.log('Click BackBtn');
-        contentWindow.webContents.send('isBack');
+        mainWindow.send('isBack');
         contentWindow.webContents.goBack();
-    })
+    });
 
     //FORWARD
     ipc.on('forward', () => {
         console.log('Click ForwardBtn');
-        contentWindow.webContents.send('isForward');
+        mainWindow.send('isForward');
         contentWindow.webContents.goForward();
-    })
-
+    });
     //RELOAD
     ipc.on('reload', () => {
         console.log('Click ReloadBtn');
-        contentWindow.webContents.send('isReload');
+        //contentWindow.webContents.send('isReload');
         contentWindow.webContents.reload();
-    })
+    });
+
+    // Check if is Reload
+    contentWindow.webContents.on('did-start-loading', () => {
+        console.log('isLoad');
+        mainWindow.send('isReload');
+    });
+
+    // Check if is Stop
+    contentWindow.webContents.on('did-stop-loading', () => {
+        console.log('isStop');
+        mainWindow.send('isStop');
+    });
+
 }
 
 // This method will be called when Electron has finished
